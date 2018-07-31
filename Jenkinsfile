@@ -90,7 +90,13 @@ for (String os in runITsOses) {
                         }
                         unstash 'dist'
                         withMaven(jdk: jdkName, maven: mvnName, mavenLocalRepo:"${WORK_DIR}/it-local-repo", options:[
-                            junitPublisher(ignoreAttachments: false)
+                            junitPublisher(ignoreAttachments: true),
+                            artifactsPublisher(disabled: true),
+                            findbugsPublisher(disabled: true),
+                            openTasksPublisher(disabled: true),
+                            dependenciesFingerprintPublisher(disabled: true),
+                            invokerPublisher(disabled: true),
+                            pipelineGraphPublisher(disabled: true)
                         ]) {
                             String cmd = "${runITscommand} -DmavenDistro=$WORK_DIR/apache-maven-dist.zip -Dmaven.test.failure.ignore=true"
                             if (stageId.endsWith('-jdk7')) {
