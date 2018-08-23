@@ -1,4 +1,0 @@
----
-applications:
-- name: application
-  buildpack: java_buildpack
